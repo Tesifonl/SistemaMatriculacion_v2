@@ -34,16 +34,7 @@ public class Alumnos {
 		return copiaAlumnos;
 	}
 
-	
-	/*public int getTamano() {
-		int tamano=0;
-		
-		for (int i=0; i<coleccionAlumnos.size();i++) {
-			if(coleccionAlumnos.get(i)!=null) {tamano++;}
-		}
-		
-		return tamano;
-	}*/
+
 	
 	public int getTamano() {
 	    return coleccionAlumnos.size();

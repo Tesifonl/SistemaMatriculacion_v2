@@ -36,15 +36,7 @@ public class Asignaturas {
 		return copiaAsignatura;
 	}
 
-	/*public int getTamano() {
-		int tamano=0;
-		
-		for (int i=0;i<coleccionAsignaturas.size();i++) {
-			if(coleccionAsignaturas.get(i)!=null) {tamano++;}
-		}
-		
-		return tamano;
-	}*/
+
 
 	public int getTamano() {
 	    return coleccionAsignaturas.size();

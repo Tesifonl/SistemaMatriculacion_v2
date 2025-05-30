@@ -39,15 +39,7 @@ public class Matriculas  {
 	}
 
 	
-	/*public int getTamano() {
-		int tamano=0;
-		
-		for (int i=0;i<coleccionMatriculas.size();i++) {
-			if(coleccionMatriculas.get(i)!=null) {tamano++;}
-		}
-		
-		return tamano;
-	}*/
+
 	
 	public int getTamano() {
 	    return coleccionMatriculas.size();

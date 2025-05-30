@@ -35,15 +35,7 @@ public class CiclosFormativos {
 		return copiaCicloFormativo;
 	}
 
-	/*public int getTamano() {
-		int tamano=0;
-		
-		for (int i=0;i<coleccionCiclosFormativos.size();i++) {
-			if(coleccionCiclosFormativos.get(i)!=null) {tamano++;}
-		}
-		
-		return tamano;
-	}*/
+
 	
 	public int getTamano() {
 	    return coleccionCiclosFormativos.size();
