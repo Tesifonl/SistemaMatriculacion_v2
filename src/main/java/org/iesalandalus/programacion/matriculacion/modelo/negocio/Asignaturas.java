@@ -1,9 +1,11 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.naming.OperationNotSupportedException;
 
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 
 public class Asignaturas {
@@ -34,7 +36,7 @@ public class Asignaturas {
 		return copiaAsignatura;
 	}
 
-	public int getTamano() {
+	/*public int getTamano() {
 		int tamano=0;
 		
 		for (int i=0;i<coleccionAsignaturas.size();i++) {
@@ -42,8 +44,11 @@ public class Asignaturas {
 		}
 		
 		return tamano;
-	}
+	}*/
 
+	public int getTamano() {
+	    return coleccionAsignaturas.size();
+	}
 	
 	
 	public void insertar(Asignatura asignatura) throws OperationNotSupportedException {
@@ -60,39 +65,29 @@ public class Asignaturas {
 		}
 	}
 
-	public Asignatura buscar(Asignatura asignatura) {
-		boolean encontrado=false;
-		boolean noEncontrado=false;
-		Asignatura asignaturaArrayCreado=null;
-		
-		if(asignatura!=null) {
-			
-			if(coleccionAsignaturas.size()>0) {
-				
-				for (Asignatura asignaturaArray:coleccionAsignaturas) {
-					
-				if(asignaturaArray.equals(asignatura)) {
-					encontrado=true;
-					asignaturaArrayCreado=asignaturaArray;
-				}else {
-					noEncontrado=true;
-				}	
-			}
-				if (encontrado!=true && noEncontrado==true) {
-					return null;
-				}else {
-					return asignaturaArrayCreado;
-				}
-			}else {
-				throw new NullPointerException("No hay asignaturas incluidas en la coleccion");
-			}	
-
-		}
-		else {
-			throw new NullPointerException("asignatura recibido nulo");
-		}
-	}
 	
+
+
+	public Asignatura buscar(Asignatura asignatura) {
+	    if (asignatura == null) {
+	        throw new NullPointerException("asignatura recibido nulo");
+	    }
+
+	    if (coleccionAsignaturas.isEmpty()) {
+	        throw new NullPointerException("No hay asignaturas incluidas en la coleccion");
+	    }
+
+	    Iterator<Asignatura> iterador = coleccionAsignaturas.iterator();
+
+	    while (iterador.hasNext()) {
+	        Asignatura asignaturaArray = iterador.next();
+	        if (asignaturaArray.equals(asignatura)) {
+	            return asignaturaArray;
+	        }
+	    }
+
+	    return null; 
+	}
 
 	
 	public void borrar(Asignatura asignatura) throws OperationNotSupportedException {

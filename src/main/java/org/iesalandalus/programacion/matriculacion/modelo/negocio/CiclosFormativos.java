@@ -1,9 +1,11 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.naming.OperationNotSupportedException;
 
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
+
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 
 public class CiclosFormativos {
@@ -33,7 +35,7 @@ public class CiclosFormativos {
 		return copiaCicloFormativo;
 	}
 
-	public int getTamano() {
+	/*public int getTamano() {
 		int tamano=0;
 		
 		for (int i=0;i<coleccionCiclosFormativos.size();i++) {
@@ -41,6 +43,10 @@ public class CiclosFormativos {
 		}
 		
 		return tamano;
+	}*/
+	
+	public int getTamano() {
+	    return coleccionCiclosFormativos.size();
 	}
 
 	
@@ -65,37 +71,30 @@ public class CiclosFormativos {
 	
 	
 	
+	
+
 	public CicloFormativo buscar(CicloFormativo cicloFormativo) {
-		boolean encontrado=false;
-		boolean noEncontrado=false;
-		CicloFormativo cicloFormativoArrayCreado=null;
-		
-		if(cicloFormativo!=null) {
-				
-				if(coleccionCiclosFormativos.size()>0) {
-					
-					for (CicloFormativo cicloFormativoArray:coleccionCiclosFormativos) {
-						
-					if(cicloFormativoArray.equals(cicloFormativo)) {
-						encontrado=true;
-						cicloFormativoArrayCreado=cicloFormativoArray;
-					}else {
-						noEncontrado=true;
-					}	
-				}
-					if (encontrado!=true && noEncontrado==true) {
-						return null;
-					}else {
-						return cicloFormativoArrayCreado;
-					}
-			}else {
-				throw new NullPointerException("No hay ciclos formativos incluidos en la coleccion");
-			}	
-		}
-		else {
-			throw new NullPointerException("ciclo formativo recibido nulo");
-		}
+	    if (cicloFormativo == null) {
+	        throw new NullPointerException("ciclo formativo recibido nulo");
+	    }
+
+	    if (coleccionCiclosFormativos.isEmpty()) {
+	        throw new NullPointerException("No hay ciclos formativos incluidos en la coleccion");
+	    }
+
+	    Iterator<CicloFormativo> iterador = coleccionCiclosFormativos.iterator();
+
+	    while (iterador.hasNext()) {
+	        CicloFormativo cicloFormativoArray = iterador.next();
+	        if (cicloFormativoArray.equals(cicloFormativo)) {
+	            return cicloFormativoArray;
+	        }
+	    }
+
+	    return null; 
 	}
+	
+
 	
 
 	public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {

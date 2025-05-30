@@ -2,6 +2,8 @@ package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
@@ -37,7 +39,7 @@ public class Matriculas  {
 	}
 
 	
-	public int getTamano() {
+	/*public int getTamano() {
 		int tamano=0;
 		
 		for (int i=0;i<coleccionMatriculas.size();i++) {
@@ -45,6 +47,10 @@ public class Matriculas  {
 		}
 		
 		return tamano;
+	}*/
+	
+	public int getTamano() {
+	    return coleccionMatriculas.size();
 	}
 
 
@@ -64,44 +70,35 @@ public class Matriculas  {
 	}
 
 	
+
+	
+
 	public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
-		boolean encontrado=false;
-		boolean noEncontrado=false;
-		Matricula matriculaArrayCreado=null;
-		
-		if(matricula!=null) {
-		
-					if(coleccionMatriculas.size()>0) {
-						
-						for (Matricula matriculaArray:coleccionMatriculas) {
-							
-						if(matriculaArray.equals(matricula)) {
-							encontrado=true;
-							matriculaArrayCreado=matriculaArray;
-						}else {
-							noEncontrado=true;
-						}	
-						}
-						if (encontrado!=true && noEncontrado==true) {
-							return null;
-						}else {
-							return matriculaArrayCreado;
-						}
-			}else {
-				throw new NullPointerException("No hay matriculas incluidas en la coleccion");
-			}
-		}
-		else {
-			throw new NullPointerException("matricula recibido nulo");
-			}
-		}
-	
-	
+	    if (matricula == null) {
+	        throw new NullPointerException("matricula recibido nulo");
+	    }
+
+	    if (coleccionMatriculas.isEmpty()) {
+	        throw new NullPointerException("No hay matriculas incluidas en la coleccion");
+	    }
+
+	    Iterator<Matricula> iterador = coleccionMatriculas.iterator();
+
+	    while (iterador.hasNext()) {
+	        Matricula matriculaArray = iterador.next();
+	        if (matriculaArray.equals(matricula)) {
+	            return matriculaArray;
+	        }
+	    }
+
+	    return null; 
+	}
+
 	
 	public void borrar(Matricula matricula) throws OperationNotSupportedException {
 		if(matricula!=null) {
 			if (coleccionMatriculas.contains(matricula)) {
-				//coleccionMatriculas.remove(matricula);
+	
 				
 				for(Matricula matriculaArray:coleccionMatriculas) {
 					if (matriculaArray.equals(matricula)) {

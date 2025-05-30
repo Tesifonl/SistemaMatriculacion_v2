@@ -168,13 +168,18 @@ public class Vista {
 		try {
 			//controlador.getAlumnos();
 			ArrayList<Alumno> nuevoArrayList=controlador.getAlumnos();
-			Collections.sort(nuevoArrayList);
-		
-				 
-			for(Alumno alumno: nuevoArrayList)
-			{
-				System.out.println("Alumno: "+alumno);
+			
+			if (nuevoArrayList!=null) {
+				Collections.sort(nuevoArrayList);
+				for(Alumno alumno: nuevoArrayList)
+				{
+					System.out.println("Alumno: "+alumno);
+				}
+			}else {
+				System.out.println(" No existen alumnos en el sistema");
 			}
+		
+
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -248,7 +253,19 @@ public class Vista {
 	private void mostrarAsignaturas()  {
 		try{
 			
-			Consola.mostrarAsignaturas(controlador.getAsignaturas());
+			//Consola.mostrarAsignaturas(controlador.getAsignaturas());
+			ArrayList<Asignatura>nuevoArrayList=controlador.getAsignaturas();
+			
+			if (nuevoArrayList!=null) {
+				Collections.sort(nuevoArrayList);
+				for(Asignatura asignatura: nuevoArrayList)
+				{
+					System.out.println("Asignatura: "+asignatura);
+				}
+			}else {
+				System.out.println(" No existen asignaturas en el sistema");
+			}
+			
 		}				
 		catch(IllegalArgumentException e) {
 				System.out.println(e.getMessage());
@@ -319,12 +336,17 @@ public class Vista {
 		try{
 			//controlador.getCiclosFormativos();
 			ArrayList<CicloFormativo>nuevoArrayList=controlador.getCiclosFormativos();
-			Collections.sort(nuevoArrayList);
-				
-			for(CicloFormativo cicloFormativo: nuevoArrayList)
-			{
-				System.out.println("Ciclo formativo: "+cicloFormativo);
+			
+			if (nuevoArrayList!=null) {
+				Collections.sort(nuevoArrayList);
+				for(CicloFormativo cicloFormativo: nuevoArrayList)
+				{
+					System.out.println("Ciclo formativo: "+cicloFormativo);
+				}		
+			}else {
+				System.out.println(" No existen ciclos formativos en el sistema");
 			}
+				
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -393,13 +415,17 @@ public class Vista {
 		try{
 			//controlador.getMatriculas();
 			ArrayList<Matricula> nuevoArrayList=controlador.getMatriculas();;
-			Collections.sort(nuevoArrayList);
+			
+			if (nuevoArrayList!=null) {
+				Collections.sort(nuevoArrayList);
+				for (Matricula matricula: nuevoArrayList) {
+					System.out.println("Matricula: "+ matricula);
+					System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
+				}
+			}else {
+				System.out.println(" No existen matriculas en el sistema");
+			}
 
-				 
-			for (Matricula matricula: nuevoArrayList) {
-				System.out.println("Matricula: "+ matricula);
-				System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
-			}	
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -416,13 +442,15 @@ public class Vista {
 		try{
 			//controlador.getMatriculas(Consola.getAlumnoPorDni());
 			ArrayList<Matricula> nuevoArrayList=controlador.getMatriculas(Consola.getAlumnoPorDni());
-			Collections.sort(nuevoArrayList);
-
-				
-			for (Matricula matricula: nuevoArrayList) {
-				System.out.println("Matricula: "+ matricula);
-				System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
+			
+			if (nuevoArrayList!=null) {
+				Collections.sort(nuevoArrayList);
+				for (Matricula matricula: nuevoArrayList) {
+					System.out.println("Matricula: "+ matricula);
+					System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
+				}
 			}
+
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -440,12 +468,15 @@ public class Vista {
 		try{
 			//controlador.getMatriculas(Consola.getCicloFormativoPorCodigo());
 			ArrayList<Matricula> nuevoArrayList=controlador.getMatriculas(Consola.getCicloFormativoPorCodigo());
-			Collections.sort(nuevoArrayList);
-
-			for (Matricula matricula: nuevoArrayList) {
-				System.out.println("Matricula: "+ matricula);
-				System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
+			
+			if (nuevoArrayList!=null) {
+				Collections.sort(nuevoArrayList);
+				for (Matricula matricula: nuevoArrayList) {
+					System.out.println("Matricula: "+ matricula);
+					System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
+				}
 			}
+
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -467,12 +498,16 @@ public class Vista {
 			//controlador.getMatriculas(cursoAcademico);
 			
 			ArrayList<Matricula> nuevoArrayList=controlador.getMatriculas(cursoAcademico);
- 	 		Collections.sort(nuevoArrayList);
+			
+			if (nuevoArrayList!=null) {
+				Collections.sort(nuevoArrayList);
+	 			for (Matricula matricula: nuevoArrayList) {
+	 				System.out.println("Matricula: "+ matricula);
+	 				System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
+	 			}
+			}
  
- 			for (Matricula matricula: nuevoArrayList) {
- 				System.out.println("Matricula: "+ matricula);
- 				System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
- 			}
+
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());

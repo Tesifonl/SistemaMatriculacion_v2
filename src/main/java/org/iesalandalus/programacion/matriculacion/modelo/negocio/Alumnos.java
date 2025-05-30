@@ -1,6 +1,8 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
@@ -33,7 +35,7 @@ public class Alumnos {
 	}
 
 	
-	public int getTamano() {
+	/*public int getTamano() {
 		int tamano=0;
 		
 		for (int i=0; i<coleccionAlumnos.size();i++) {
@@ -41,6 +43,10 @@ public class Alumnos {
 		}
 		
 		return tamano;
+	}*/
+	
+	public int getTamano() {
+	    return coleccionAlumnos.size();
 	}
 
 	
@@ -60,39 +66,29 @@ public class Alumnos {
 	}
 	
 	
-	public Alumno buscar(Alumno alumno) {
 
-		boolean encontrado=false;
-		boolean noEncontrado=false;
-		Alumno AlumnoArrayCreado=null;
-		
-		if(alumno!=null) {
-			
-			if (coleccionAlumnos.size()>0) {
-				
-				for (Alumno alumnoArray:coleccionAlumnos) {
-				
-				if(alumnoArray.equals(alumno)) {
-					encontrado=true;
-					AlumnoArrayCreado=alumnoArray;
-				}else {
-					noEncontrado=true;
-				}	
-			}
-				if (encontrado!=true && noEncontrado==true) {
-					return null;
-				}else {
-					return AlumnoArrayCreado;
-				}
-			}
-			else {
-			throw new NullPointerException("No hay alumnos incluidos en la coleccion");		
-			}
-		}
-		else {
-			throw new NullPointerException("alumno recibido nulo");
-		}
+
+	public Alumno buscar(Alumno alumno) {
+	    if (alumno == null) {
+	        throw new NullPointerException("alumno recibido nulo");
+	    }
+
+	    if (coleccionAlumnos.isEmpty()) {
+	        throw new NullPointerException("No hay alumnos incluidos en la coleccion");
+	    }
+
+	    Iterator<Alumno> iterador = coleccionAlumnos.iterator();
+
+	    while (iterador.hasNext()) {
+	        Alumno alumnoArray = iterador.next();
+	        if (alumnoArray.equals(alumno)) {
+	            return alumnoArray;
+	        }
+	    }
+
+	    return null; 
 	}
+
 
 	
 	public void borrar(Alumno alumno) throws OperationNotSupportedException {

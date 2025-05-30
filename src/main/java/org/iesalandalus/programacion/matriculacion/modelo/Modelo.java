@@ -53,7 +53,7 @@ public class Modelo {
 	  		
 		if (alumno!=null) {
 
-			//System.out.println(alumnos.buscar(alumno));
+			
 			return alumnos.buscar(alumno);
 
 		}else {
@@ -82,17 +82,9 @@ public class Modelo {
 	
   			 if(alumnos.getTamano()>0) {
   				 ArrayList<Alumno> nuevoArrayList=alumnos.get();
-  				 /*Collections.sort(nuevoArrayList);
-  		
-  				 
-  				 for(Alumno alumno: nuevoArrayList)
-  				 {
-  					 System.out.println("Alumno: "+alumno);
-  				 }*/
   				 return nuevoArrayList;
   			 }
   			 else {
-  				 System.out.println(" No existen alumnos en el sistema");
   				 return null;
   			 }
 
@@ -116,7 +108,7 @@ public class Modelo {
     	if(asignatura!=null) {
 
     		if (asignaturas.buscar(asignatura)!=null) {
-    			//System.out.println(asignaturas.buscar(asignatura));
+   
     			return asignaturas.buscar(asignatura);
     		}
     		else {
@@ -153,7 +145,6 @@ public class Modelo {
   				 return nuevoArrayList;
   				 }
   			 else {
-  				 
   				 return null;
   			 }	
 
@@ -179,7 +170,6 @@ public class Modelo {
 
     		if(ciclosFormativos.buscar(cicloFormativo)!=null) {
     	
-    			//System.out.println(ciclosFormativos.buscar(cicloFormativo));
     			return ciclosFormativos.buscar(cicloFormativo);
     		}
     		else {
@@ -208,17 +198,11 @@ public class Modelo {
 
   			 if(ciclosFormativos.getTamano()>0) {
   				 ArrayList<CicloFormativo>nuevoArrayList=ciclosFormativos.get();
-  				 /*Collections.sort(nuevoArrayList);
-  				
-  				 for(CicloFormativo cicloFormativo: nuevoArrayList)
-  				 {
-  					 System.out.println("Alumno: "+cicloFormativo);
-  				 }*/
+
   				 return nuevoArrayList;
   			 } 
   	  			
   			 else {
-  				 System.out.println(" No existen ciclos formativos en el sistema");
   				 return null;
   			 }
   			
@@ -243,7 +227,6 @@ public class Modelo {
     		
     		if(matriculas.buscar(matricula)!=null) {
 
-    			//System.out.println(matriculas.buscar(matricula));
     			return matriculas.buscar(matricula);
     		}
     		else {
@@ -274,17 +257,9 @@ public class Modelo {
   			 if(matriculas.getTamano()>0) {
   				
   				 ArrayList<Matricula> nuevoArrayList=matriculas.get();
-  				/* Collections.sort(nuevoArrayList);
-
-  				 
-  				 for (Matricula matricula: nuevoArrayList) {
-  					 System.out.println("Matricula: "+ matricula);
-  					 System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
-  				 }*/
   				 return matriculas.get();
   			 }
   			 else {
-  				 System.out.println(" No existen matriculas en el sistema");
   				 return null;
   			 }
   			
@@ -297,14 +272,6 @@ public class Modelo {
     	
  			
  			if (matriculas.get(alumno)!=null) {
- 				/*ArrayList<Matricula> nuevoArrayList=matriculas.get(alumno);
- 				Collections.sort(nuevoArrayList);
-
- 				
- 				for (Matricula matricula: nuevoArrayList) {
- 					System.out.println("Matricula: "+ matricula);
- 					System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
- 				}*/
  				 return matriculas.get(alumno);
  			}
  			else {
@@ -321,14 +288,6 @@ public class Modelo {
     	if(cicloFormativo!=null) {
 
  			if (matriculas.get(cicloFormativo)!=null) {
- 				
- 				/*ArrayList<Matricula> nuevoArrayList=matriculas.get(cicloFormativo);
- 				Collections.sort(nuevoArrayList);
-
- 				for (Matricula matricula: nuevoArrayList) {
- 					System.out.println("Matricula: "+ matricula);
- 					System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
- 				}*/
  				
  				 return matriculas.get(cicloFormativo); 
  			}
@@ -347,14 +306,6 @@ public class Modelo {
     		
  			
  			if (matriculas.get(cursoAcademico)!=null) {
- 				
- 				/*ArrayList<Matricula> nuevoArrayList=matriculas.get(cursoAcademico);
- 	 			Collections.sort(nuevoArrayList);
- 
- 				for (Matricula matricula: nuevoArrayList) {
- 					System.out.println("Matricula: "+ matricula);
- 					System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
- 				}*/
  	 			
  				 return matriculas.get(cursoAcademico);
 			}
