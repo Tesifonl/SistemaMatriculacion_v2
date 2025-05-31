@@ -114,8 +114,19 @@ public class Vista {
 
 	private void insertarAlumno()  {
 		try {
-			controlador.insertarAlumno(Consola.leerAlumno());
-			System.out.println("Alumno insertado correctamente");
+			Alumno alumno=Consola.leerAlumno();
+			if(controlador.getAlumnos()==null) {
+				controlador.insertarAlumno(alumno);
+				System.out.println("Alumno insertado correctamente");
+			}else if(!controlador.getAlumnos().contains(alumno)) {
+				controlador.insertarAlumno(alumno);
+				System.out.println("Alumno insertado correctamente");
+			}else {
+				System.out.println("ERROR: El alumno ya estaba incluido en la coleccion");
+			}
+			
+			//controlador.insertarAlumno(Consola.leerAlumno());
+			//System.out.println("Alumno insertado correctamente");
 		}	
 		
 		catch(IllegalArgumentException e) {
@@ -198,12 +209,17 @@ public class Vista {
 		try {
 			
 			Asignatura asignatura=Consola.leerAsignatura();
-			if (controlador.getAsignaturas()==null || Consola.asignaturaYaMatriculada(controlador.getAsignaturas(), asignatura)!=true) {
+			
+			if(asignatura==null) {
+				System.out.println("ERROR: Asignatura creada erroneamente");
+			}else if (controlador.getCiclosFormativos()==null ||!controlador.getCiclosFormativos().contains(asignatura.getCicloFormativo())) {
+				System.out.println("ERROR: El ciclo formativo de la asignatura no esta incluido en la coleccion, debe incluirlo previamente");
+			}else if(controlador.getAsignaturas()==null || Consola.asignaturaYaMatriculada(controlador.getAsignaturas(), asignatura)!=true) {
 			controlador.insertarAsignatura(asignatura);
 			System.out.println("Asignatura insertada correctamente");
 			}else
 			{
-				System.out.println("Asignatura insertada anteriormente");
+				System.out.println("ERROR:Asignatura insertada anteriormente");
 			}
 		}				
 		catch(IllegalArgumentException e) {
@@ -281,8 +297,19 @@ public class Vista {
 	private void insertarCicloFormativo() {
 		
 		try{
-			controlador.insertarCicloFormativo(Consola.leerCicloFormativo());
-			System.out.println("Ciclo formativo insertado correctamente");
+			
+			CicloFormativo cicloFormativo=Consola.leerCicloFormativo();
+			if(controlador.getCiclosFormativos()==null) {
+				controlador.insertarCicloFormativo(cicloFormativo);
+				System.out.println("Ciclo formativo insertado correctamente");
+			}else if(!controlador.getCiclosFormativos().contains(cicloFormativo)) {
+				controlador.insertarCicloFormativo(cicloFormativo);;
+				System.out.println("Ciclo formativo insertado correctamente");
+			}else {
+				System.out.println("ERROR: El ciclo formativo ya estaba incluido en la coleccion");
+			}
+			//controlador.insertarCicloFormativo(Consola.leerCicloFormativo());
+			//System.out.println("Ciclo formativo insertado correctamente");
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -360,8 +387,55 @@ public class Vista {
 
 	private void  insertarMatricula() {
 		try{
-			controlador.insertarMatricula(Consola.leerMatricula(Consola.getAlumnoPorDni(), Consola.elegirAsignaturasMatricula()));
-			System.out.println("Matricula insertada correctamente");
+			
+			Alumno alumno=Consola.getAlumnoPorDni();
+			ArrayList<Asignatura>coleccionAsignaturas=Consola.elegirAsignaturasMatricula();
+			ArrayList<Asignatura>nuevaColeccionAsignaturas=new ArrayList<Asignatura>();
+
+			boolean noEncontrado1=false;
+			boolean noEncontrado2=false;
+			
+			if(controlador.getAlumnos()==null ||!controlador.getAlumnos().contains(alumno)) {
+				System.out.println("ERROR: El alumno no esta incluido en el sistema");
+				noEncontrado2=false;
+			}else if(controlador.getAsignaturas()==null) {
+					System.out.println("ERROR: Las asignaturas no estan incluido en el sistema");
+					noEncontrado2=false;
+			}else {
+					for(Asignatura asignatura: coleccionAsignaturas) 
+						if (!controlador.getAsignaturas().contains(asignatura)) {
+							System.out.println("ERROR: Las asignaturas no estan incluido en el sistema");
+						    noEncontrado1=true;
+						}else if(nuevaColeccionAsignaturas!=null && Consola.asignaturaYaMatriculada(nuevaColeccionAsignaturas,asignatura)==true) {
+							System.out.println("ERROR: Asignatura repetida en la matricula ");
+						    noEncontrado1=true;
+						}
+						
+						else {
+							noEncontrado2=true;
+							Asignatura asignaturaRecuperada=controlador.buscarAsignatura(asignatura);
+							nuevaColeccionAsignaturas.add(asignaturaRecuperada);
+						}
+			}
+			
+			
+			if (noEncontrado2==true && noEncontrado1==false) {
+				
+			Alumno nuevoAlumno=controlador.buscarAlumno(alumno);
+			
+			Matricula matricula=Consola.leerMatricula(nuevoAlumno, nuevaColeccionAsignaturas);
+			
+			if(controlador.getMatriculas()==null) {
+				controlador.insertarMatricula(matricula);
+				System.out.println("Matricula insertada correctamente");
+			}else if(!controlador.getMatriculas().contains(matricula)) {
+				controlador.insertarMatricula(matricula);
+				System.out.println("Matricula insertada correctamente");
+			}else {
+				System.out.println("ERROR: La matricula ya estaba incluida en la coleccion");
+			}
+			}
+
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -396,8 +470,12 @@ public class Vista {
 	private void  anularMatricula()  {
 		
 		try{
-			controlador.borrarMatricula(Consola.getMatriculaPorIdentificador());
-			System.out.println("Matricula anulada correctamente");
+			Matricula nuevaMatricula=controlador.buscarMatricula(Consola.getMatriculaPorIdentificador());
+			if (nuevaMatricula!=null) {
+				controlador.borrarMatricula(nuevaMatricula);
+				System.out.println("Matricula anulada correctamente");
+			}
+			else {System.out.println("Matricula anulada correctamente");}
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -468,6 +546,7 @@ public class Vista {
 		try{
 			//controlador.getMatriculas(Consola.getCicloFormativoPorCodigo());
 			ArrayList<Matricula> nuevoArrayList=controlador.getMatriculas(Consola.getCicloFormativoPorCodigo());
+			
 			
 			if (nuevoArrayList!=null) {
 				Collections.sort(nuevoArrayList);

@@ -40,7 +40,7 @@ public class Modelo {
 	public  void insertarAlumno(Alumno alumno) throws OperationNotSupportedException {
 		
 		if(alumno!=null) {
-
+				
 				alumnos.insertar(alumno);	
 	
 		}else {
